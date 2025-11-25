@@ -1,0 +1,85 @@
+@if(loaded){
+  <div class="row my-3">
+    <div class="div col-12 my-2">
+      <h2 class="text-center text-secondary">{{idJuguete?'EDITANDO'+ nombre.value : 'NUEVO JUGUETE'}}</h2>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="formJuguete" (ngSubmit)="onSubmit()">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+                 id="nombre" placeholder="Nombre"
+                 formControlName="nombre">
+          <label for="nombre">Nombre: </label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+                 id="categoria" placeholder="Categoria"
+                 formControlName="categoria">
+          <label for="nombre">Categoría: </label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+                 id="edadMinima" placeholder="Edad Minima"
+                 formControlName="edadMinima">
+          <label for="nombre">Edad Mínima:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+                 id="precio" placeholder="Precio"
+                 formControlName="precio">
+          <label for="nombre">Precio:</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control"
+                 id="imagen" placeholder="Imagen"
+                 formControlName="imagen">
+          <label for="nombre">Imagen: </label>
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <!--Con esto controlamos el formulario 1 hasta  queno se rellene el formulario no aparece el boton de enviar o en la funcion OnSubmit controlarlo-->
+            <button class="btn btn-outline-success"
+                    [disabled]="formJuguete.invalid"
+                    type="submit"
+            >GUARDAR
+            </button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+    <div class="col-md-4 offset-2">
+      <div class="card shadow">
+        <div class="card-header bg-light-subtle">
+          <h5 class="card-title text-capitalize">{{nombre.value? nombre.value : 'Nombre del juguete'}}</h5>
+        </div>
+        <img [src]="imagen.value? imagen.value : '/images/no-imagen.jpg'" [alt]="nombre.value" class="card-img-top">
+        <div class="card-body">
+          <p class="badge bg-primary">{{ categoria.value? categoria.value : 'Categoría' }}</p>
+          <p><strong>Edad Mínima: </strong><span class="text-primary">{{ edadMinima.value? edadMinima.value : 0 }}</span></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          @if (precio.value){
+            <p>{{ precio.value | currency: 'EUR' }}</p>
+          } @else {
+            <p>{{ 0 | currency: 'EUR' }}</p>
+          }
+          <h4>
+            <fa-icon  [icon]="faEdit" class="text-primary"></fa-icon>
+            <fa-icon  [icon]="faTrashCan" class="text-danger"></fa-icon>
+          </h4>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+}  @else {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+}

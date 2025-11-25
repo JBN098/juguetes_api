@@ -1,0 +1,52 @@
+@if (loaded) {
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-center">
+
+     <!-- aqui se hace la paginación-->
+      <ngb-pagination
+        [(page)]="currentPage"
+        (pageChange)="changePage($event)"
+        [collectionSize]="apiData.juguetes.info.total"
+        [pageSize]="9"
+        [ellipses]="true"
+        [maxSize]="3"
+        [boundaryLinks]="true">
+
+      </ngb-pagination>
+
+
+    </div>
+
+    @for (juguete of jugueteList; track juguete._id) {
+      <div class="col-md-4 my-2">
+        <div class="card shadow">
+          <div class="card-header bg-light-subtle">
+            <h5 class="card-title text-capitalize">{{ juguete.nombre }}</h5>
+          </div>
+          <img [src]="juguete.imagen" [alt]="juguete.nombre" class="card-img-top">
+          <div class="card-body">
+            <p class="badge bg-primary">{{ juguete.categoria }}</p>
+            <p><strong>Edad Mínima: </strong><span class="text-primary">{{ juguete.edadMinima }}</span></p>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <p>{{ juguete.precio | currency: 'EUR' }}</p>
+            <h4>
+              <fa-icon [routerLink]="'/juguetes/edit/'+ juguete._id"   [icon]="faEdit" class="text-primary"></fa-icon>
+              <fa-icon (click)="deleteJuguete(juguete)" [icon]="faTrashCan" class="text-danger"></fa-icon>
+            </h4>
+
+          </div>
+        </div>
+      </div>
+    }
+
+  </div>
+} @else {
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+}
+
