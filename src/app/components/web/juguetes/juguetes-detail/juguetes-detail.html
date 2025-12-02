@@ -10,30 +10,104 @@
                  id="nombre" placeholder="Nombre"
                  formControlName="nombre">
           <label for="nombre">Nombre: </label>
+          @if (nombre.invalid && (nombre.dirty || nombre.touched)){
+            <div class="alert text-danger">
+              @if (nombre.errors ['required']){
+                <div class="small">Nombre es obligatorio</div>
+              }
+              @if (nombre.errors ['maxlength']){
+                <div class="small">Nombre solo permite 20 carácteres</div>
+              }
+              @if (nombre.errors ['minlength']){
+                <div class="small">Nombre debe tener como mínimo 2 carácteres</div>
+              }
+              @if (nombre.errors ['notOnlyWhiteSpace']){
+                <div class="small">El nombre no puede ser espacios en blanco</div>
+              }@if (nombre.errors ['forbiddenWord']){
+                <div class="small">Nombre no puede tener palabras malsonantes</div>
+              }
+            </div>
+          }
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
                  id="categoria" placeholder="Categoria"
                  formControlName="categoria">
-          <label for="nombre">Categoría: </label>
+          <label for="categoria">Categoría: </label>
+           @if (categoria.invalid && (categoria.dirty || categoria.touched)){
+            <div class="alert text-danger">
+              @if (categoria.errors ['required']){
+                <div class="small">Categoria es obligatorio</div>
+              }
+              @if (categoria.errors ['maxlength']){
+                <div class="small">Categoría solo permite 30 carácteres</div>
+              }
+              @if (categoria.errors ['minlength']){
+                <div class="small">Categoría debe tener como mínimo 5 carácteres</div>
+              }
+              @if (categoria.errors ['notOnlyWhiteSpace']){
+                <div class="small">El categoria no puede ser espacios en blanco</div>
+              }@if (categoria.errors ['forbiddenWord']){
+              <div class="small">Categoria no puede tener palabras malsonantes</div>
+            }
+            </div>
+          }
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
                  id="edadMinima" placeholder="Edad Minima"
                  formControlName="edadMinima">
-          <label for="nombre">Edad Mínima:</label>
+          <label for="edadMinima">Edad Mínima:</label>
+           @if (edadMinima.invalid && (edadMinima.dirty || edadMinima.touched)){
+            <div class="alert text-danger">
+              @if (edadMinima.errors ['required']){
+                <div class="small">Edad Minima es obligatorio</div>
+              }
+              @if (edadMinima.errors ['max']){
+                <div class="small">Edad Minima no puede ser más de 55 años</div>
+              }
+              @if (edadMinima.errors ['min']){
+                <div class="small">Edad Minima debe tener como mínimo 0 añis</div>
+              }
+            </div>
+          }
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
                  id="precio" placeholder="Precio"
                  formControlName="precio">
-          <label for="nombre">Precio:</label>
+          <label for="precio">Precio:</label>
+           @if (precio.invalid && (precio.dirty || precio.touched)){
+            <div class="alert text-danger">
+              @if (precio.errors ['required']){
+                <div class="small">Precio es obligatorio</div>
+              }
+              @if (precio.errors ['min']){
+                <div class="small">El precio minimo debe ser superior a 0</div>
+              }
+            </div>
+          }
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control"
                  id="imagen" placeholder="Imagen"
                  formControlName="imagen">
-          <label for="nombre">Imagen: </label>
+          <label for="imagen">Imagen: </label>
+           @if (imagen.invalid && (imagen.dirty || imagen.touched)){
+            <div class="alert text-danger">
+              @if (imagen.errors ['required']){
+                <div class="small">Imagen es obligatorio</div>
+              }
+              @if (imagen.errors ['minlength']){
+                <div class="small">Imagen debe tener como mínimo 7 carácteres</div>
+              }
+              @if (imagen.errors ['notOnlyWhiteSpace']){
+                <div class="small">El imagen no puede ser espacios en blanco</div>
+              }@if (imagen.errors ['forbiddenWord']){
+              <div class="small">Imagen no puede tener palabras malsonantes</div>
+            }
+            </div>
+          }
         </div>
 
         <div class="row justify-content-end">
@@ -75,6 +149,16 @@
 
     </div>
   </div>
+  @if (show){
+    <ngb-toast
+      class = "toast-container position-fixed top-0 end-0 p-3" style="z-index: 1200"
+      [autohide]= "true"
+      [delay]="1000"
+      [class]= "toast.className">{{toast.text}}</ngb-toast>
+
+  }
+
+
 
 }  @else {
   <div class="d-flex justify-content-center">

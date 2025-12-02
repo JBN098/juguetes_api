@@ -25,6 +25,10 @@ export interface ApiResponseDeleteJuguete {
   message: string
 }
 
+export interface Toast{
+  text: string;
+  className: string;
+}
 
 
 
