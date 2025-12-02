@@ -21,6 +21,7 @@ import {RouterLink} from '@angular/router';
 export class JuguetesList implements OnInit {
   private readonly dataService: DataService= inject(DataService);
   jugueteList: Juguete[]=[];
+  //obtenemos información de la paginación
   apiData !: ApiResponseJuguetesByPage;
   // esto es para el paginado
   currentPage = 1;
